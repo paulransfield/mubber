@@ -1,0 +1,7 @@
+*.zip
+*.gz
+log/*.log
+log/*.log.[0-9]
+assets/images
+assets/pdfs
+node_modules
