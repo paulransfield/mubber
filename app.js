@@ -5,7 +5,7 @@ const app = express();
 //express webserver request route handlers
 
 app.get('/api', (req, res) => {
-  res.send( { hi: "there"});
+  res.send( { hi: "there" });
 });
 
 module.exports = app;
