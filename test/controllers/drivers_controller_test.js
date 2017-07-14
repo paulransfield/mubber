@@ -19,4 +19,23 @@ describe('Drivers controller', () => {
         });
     });
   });
+
+  it('PUT to /api/drivers/id edits an existing driver', (done) => {
+    //step 1 create a driver - test changing driving from false to true
+    const driver = new Driver({ email: 't1@t.com', driving: false });
+    //step 2 save and edit the new driver 'driving flag'
+    driver.save().then(() => {
+      request(app)
+        .put(`/api/drivers/${driver._id}`) //es6 syntax equivalent to ('/api/drivers/' + driver_id)
+        .send({ driving: true })
+        .end(() => {
+          // step 3 test to find driver in mongo where flag for driver_id is now true
+          Driver.findOne({ email: 't1@t.com' })
+            .then(driver => {
+              assert(driver.driving === true);
+              done();
+            });
+        });
+    });
+  });
 });
