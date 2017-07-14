@@ -38,4 +38,24 @@ describe('Drivers controller', () => {
         });
     });
   });
+
+  it('DELETE to /api/drivers/id deletes an existing driver', (done) => {
+    //test logic create driver, delete driver, then test assert no driver can be found
+    const driver = new Driver({ email: 'test2_delete@t.com' });
+
+    //step 2 save and then delete the new driver
+    driver.save().then(() => {
+      request(app)
+        .delete(`/api/drivers/${driver._id}`)
+        .end(() => {
+          // step 3 test to find driver in mongo where flag for driver_id is now true
+          Driver.findOne({ email: 'test2_delete@t.com' })
+            .then(driver => {
+              console.log('delete-driver-2>===>', driver);
+              assert(driver === null);
+              done();
+            });
+        });
+    });
+  });
 });

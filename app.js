@@ -9,9 +9,11 @@ if (process.env.NODE_ENV !== 'test') {
   mongoose.connect('mongodb://localhost/muber', {useMongoClient: true});
 };
 
+//middleware to transform incoming json request data into an object 
 app.use(bodyParser.json());
 routes(app);
 
+//middleware to handle errors
 app.use((err, req, res, next) => {
   res.status(422).send({ error: err.message });
 });
