@@ -12,6 +12,7 @@ before(done => {
 beforeEach(done => {
   const drivers = mongoose.connection.collections.drivers;
   drivers.drop()
+    .then(() => drivers.ensureIndex({ 'geometry.coordinates':'2dsphere' })) //persist coordinates from being dropped
     .then(() => done())
     .catch(() => done()); //for when database doesn't exist
 });

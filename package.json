@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "geojson": "^0.4.1",
     "mocha": "^3.4.2",
     "mongoose": "^4.11.1",
     "supertest": "^3.0.0"
